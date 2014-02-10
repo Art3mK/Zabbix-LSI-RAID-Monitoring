@@ -1,0 +1,6 @@
+LSI RAID BBU & LD Status
+	0 -> Optimal
+	1 -> Failed
+LSI RAID PhysDrv Status
+	0 -> (Online|Hostpare|Unconfigured good)
+	1 -> Failed
