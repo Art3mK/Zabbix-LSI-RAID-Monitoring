@@ -6,18 +6,21 @@
 **Adapter**
 - Adapter model
 - Firmware version
+
 **Battery Backup Unit**
 - BBU State (+trigger)
 - BBU State of charge (+trigger)
 - BBU manufacture date (disabled by default)
 - BBU design capacity (disabled by default)
 - BBU current capacity (disabled by default)
+
 **Physical drives**
 - Firmware state (+trigger)
 - Predictive errors (+trigger)
 - Media errors (+trigger)
 - Size
-* Model
+- Model
+
 **Logical volumes**
 - Volume state (+trigger)
 - Volume size
@@ -34,7 +37,7 @@ This scrips reports all values for "critical" items at once. Currently it report
 
 Discovery and "trapper" scripts are executed by system scheduler.
 
-Agent userparameters:
+**Agent userparameters:**
 ```
 # windows
 UserParameter=hw.raid.physical_disk[*],C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File "C:\Program Files\zabbix_agent\raid_check.ps1" -mode pdisk -item $4 -adapter $1 -enc $2 -pdisk $3
