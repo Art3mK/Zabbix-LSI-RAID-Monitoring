@@ -1,36 +1,36 @@
-## Zabbix template for Intel/LSI/Symbios RAID Controllers
+### Zabbix template for Intel/LSI/Symbios RAID Controllers
 
 [Topic](https://www.zabbix.com/forum/showthread.php?t=41439) on zabbix forum
 
-### Available items:
-*Adapter*
-	* Adapter model
-	* Firmware version
-*Battery Backup Unit*
-	* BBU State (+trigger)
-	* BBU State of charge (+trigger)
-	* BBU manufacture date (disabled by default)
-	* BBU design capacity (disabled by default)
-	* BBU current capacity (disabled by default)
-*Physical drives*
-	* Firmware state (+trigger)
-	* Predictive errors (+trigger)
-	* Media errors (+trigger)
-	* Size	
-	* Model	
-*Logical volumes*
-	* Volume state (+trigger)
-	* Volume size
+#### Available items:
+**Adapter**
+- Adapter model
+- Firmware version
+**Battery Backup Unit**
+- BBU State (+trigger)
+- BBU State of charge (+trigger)
+- BBU manufacture date (disabled by default)
+- BBU design capacity (disabled by default)
+- BBU current capacity (disabled by default)
+**Physical drives**
+- Firmware state (+trigger)
+- Predictive errors (+trigger)
+- Media errors (+trigger)
+- Size
+* Model
+**Logical volumes**
+- Volume state (+trigger)
+- Volume size
 
-### Scripts
+#### Scripts
 3 scripts are available for windows (powershell) and unix (perl) servers
 
-#### RAID Discovery script
-	This script is used for Low Level Discovery of RAID configuration. Scripts uses zabbix_sender and agent configuration file to report RAID configuration to zabbix.
-#### RAID checks script
-	This script is used by zabbix agent to check "non critical" items, such as adapter model, physical drive size, etc. But this script also supports checking of all items from template (i.e. you can change type for all items from 'Zabbix trapper' to 'Zabbix Agent'). I've created "trapper" version of this script, because zabbix agent very often reports that some item is not supported (I noticed that problem only on Windows servers). Probably there are some locking occurs, when zabbix agent checks a lot of items at the same time.
-#### RAID "trapper" check script
-	This scrips reports all values for "critical" items at once. Currently it reports BBU state and state of charge, physical drives state, predictive and media erros, logical volumes states. All other checks are performed by zabbix agent using RAID checks scripts and userparameters.
+##### RAID Discovery script
+This script is used for Low Level Discovery of RAID configuration. Scripts uses zabbix_sender and agent configuration file to report RAID configuration to zabbix.
+##### RAID checks script
+This script is used by zabbix agent to check "non critical" items, such as adapter model, physical drive size, etc. But this script also supports checking of all items from template (i.e. you can change type for all items from 'Zabbix trapper' to 'Zabbix Agent'). I've created "trapper" version of this script, because zabbix agent very often reports that some item is not supported (I noticed that problem only on Windows servers). Probably there are some locking occurs, when zabbix agent checks a lot of items at the same time.
+##### RAID "trapper" check script
+This scrips reports all values for "critical" items at once. Currently it reports BBU state and state of charge, physical drives state, predictive and media erros, logical volumes states. All other checks are performed by zabbix agent using RAID checks scripts and userparameters.
 
 Discovery and "trapper" scripts are executed by system scheduler.
 
