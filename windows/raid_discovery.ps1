@@ -72,9 +72,9 @@ for ($adapter = 0; $adapter -lt $number_of_adapters;$adapter++) {
 					$check_next_line    = 1
 				} elseif ((($regex_slot.isMatch($line)) -eq $True) -and ($check_next_line -eq 1) -and ($enclosure_id -ne -1)) {
 					$drive_id           = $regex_slot.Matches($line) | % {$_.groups[1].value}
+					$physical_drives.Add("$adapter-$enclosure_id-$drive_id","{ `"{#ENCLOSURE_ID}`":`"$enclosure_id`", `"{#PDRIVE_ID}`":`"$drive_id`", `"{#ADAPTER_ID}`":`"$adapter`" }")
 					$check_next_line    = 0
 					$enclosure_id       = -1
-					$physical_drives.Add("$adapter-$enclosure_id-$drive_id","{ `"{#ENCLOSURE_ID}`":`"$enclosure_id`", `"{#PDRIVE_ID}`":`"$drive_id`", `"{#ADAPTER_ID}`":`"$adapter`" }")
 				} else {
 					Continue
 				}
