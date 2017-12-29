@@ -2,6 +2,21 @@
 
 [Topic](https://www.zabbix.com/forum/showthread.php?t=41439) on zabbix forum
 
+### LSI_RAID_valuemaps
+Zabbix value mappings for "Template LSI RAID". Should be imported before template via "Administration" -> "General" -> "Value mapping" -> "Import".
+
+#### Available items:
+**LSI RAID BBU & LD Status**
+- 0 -> Optimal
+- 1 -> Failed
+ 
+**LSI RAID PhysDrv Status**
+- 0 -> (Online|Hostpare|Unconfigured good)
+- 1 -> Failed
+
+### LSI_RAID_template
+Zabbix template "Template LSI RAID". Should be imported after Zabbix value mappings via "Configuration" -> "Templates" -> "Import".
+
 #### Available items:
 **Adapter**
 - Adapter model
