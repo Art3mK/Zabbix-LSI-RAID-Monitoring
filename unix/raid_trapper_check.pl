@@ -52,7 +52,7 @@ for (my $adapter = 0; $adapter < $adp_count; $adapter++) {
                 my $bbu_state = 1;
                 $bbu_state = 0 if ($1 =~ m/^(Optimal|Operational)$/);
                 print ZSEND_FILE "- hw.raid.bbu[$adapter,\"bbu_state\"] \"$bbu_state\"\n";
-            } elsif (($line =~ m/Absolute\sState\sof\scharge\s*:\s(\d+).*%/)) {
+            } elsif (($line =~ m/(?:Relative|Absolute)\sState\sof\sCharge\s*:\s(\d+).*%/i)) {
                 my $state_of_charge = $1;
                 print ZSEND_FILE "- hw.raid.bbu[$adapter,\"state_of_charge\"] \"$state_of_charge\"\n";
             } else {
