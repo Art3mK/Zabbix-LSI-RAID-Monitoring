@@ -61,13 +61,13 @@ sub pdisk_item() {
     if ($item_found) {
         if ($item eq 'firmware_state') {
             if ($output =~ m/^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$/) {
-                $output = 0
+                $output = 0;
             }
             elsif ($output =~ m/^Rebuild/) {
-                $output = 2
+                $output = 2;
             }
             else {
-                $output = 1
+                $output = 1;
             }
         }
         print $output;
