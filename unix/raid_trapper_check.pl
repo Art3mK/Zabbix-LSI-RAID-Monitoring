@@ -104,8 +104,16 @@ for (my $adapter = 0; $adapter < $adp_count; $adapter++) {
             print ZSEND_FILE        "- hw.raid.physical_disk[$adapter,$enclosure_id,$drive_id,\"predictive_errors\"] \"$predictive_errors\"\n";
             $check_next_line        = 1;
         } elsif (($line =~ m/^Firmware state:\s(.*)/) && $check_next_line && ($drive_id != -1)) {
-            my $firmware_state      = 1;
-            $firmware_state         = 0 if ($1 =~ m/^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$/);
+            my $firmware_state;
+            if ($1 =~ m/^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$/) {
+                $firmware_state     = 0;
+            }
+            elsif ($1 =~ m/^Rebuild/) {
+                $firmware_state     = 2;
+            }
+            else {
+                $firmware_state     = 1;
+            }
             print ZSEND_FILE        "- hw.raid.physical_disk[$adapter,$enclosure_id,$drive_id,\"firmware_state\"] \"$firmware_state\"\n";
             $check_next_line        = 0;
             $drive_id               = -1;

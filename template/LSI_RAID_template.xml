@@ -694,6 +694,15 @@
                             <description/>
                             <type>0</type>
                         </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template LSI RAID:hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;firmware_state&quot;].last()}=2</expression>
+                            <name>Disk state Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID} is Rebuild</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                        </trigger_prototype>
                     </trigger_prototypes>
                     <graph_prototypes/>
                     <host_prototypes/>
