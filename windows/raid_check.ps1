@@ -51,7 +51,15 @@ function pdisk_item($item,$adapter,$enclosure_id,$disk_id) {
     if ($enclosure_id -eq 2989) { $enclosure_id = '' }
     $output = (& $CLI -pdinfo -PhysDrv["$enclosure_id":"$disk_id"] -a $adapter -NoLog | Select-String $regex -AllMatches | % { $_.Matches } | % { $_.groups[1].value })
     if ($item -eq 'firmware_state') {
-        if ($output -Match '^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$') { $output = 0 } else { $output = 1 }
+        if ($output -Match '^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$') {
+            $output = 0
+        }
+        elseif (($output -Match '^Rebuild') {
+            $output = 2
+        }
+        else {
+            $output = 1
+        }
     }
     write-host $output
 }

@@ -13,6 +13,7 @@ Zabbix value mappings for "Template LSI RAID". Should be imported before templat
 **LSI RAID PhysDrv Status**
 - 0 -> (Online|Hostpare|Unconfigured good)
 - 1 -> Failed
+- 2 -> Rebuild
 
 ### LSI_RAID_template
 Zabbix template "Template LSI RAID". Should be imported after Zabbix value mappings via "Configuration" -> "Templates" -> "Import".

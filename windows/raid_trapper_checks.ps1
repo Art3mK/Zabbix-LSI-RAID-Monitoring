@@ -152,7 +152,15 @@ for ($adapter = 0; $adapter -lt $number_of_adapters;$adapter++) {
                                 (($regex_firmware_state.isMatch($line)) -eq $True)
                             ) {
                         $firmware_state = $regex_firmware_state.Matches($line) | % {$_.groups[1].value}
-                        if ($firmware_state -match '^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$') { $firmware_state = 0 } else { $firmware_state = 1 }
+                        if ($firmware_state -match '^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$') {
+                            $firmware_state = 0
+                        }
+                        elseif ($firmware_state -match '^Rebuild') {
+                            $firmware_state = 2
+                        }
+                        else {
+                            $firmware_state = 1
+                        }
                         $writer.WriteLine("- hw.raid.physical_disk[$adapter,$enclosure_id,$drive_id,`"firmware_state`"] `"$firmware_state`"")
                         $check_next_line = 1
                 } else { Continue }
