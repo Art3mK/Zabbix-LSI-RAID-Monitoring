@@ -102,6 +102,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>Adapter {#ADAPTER_ID} model</name>
@@ -144,6 +145,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes/>
@@ -220,6 +222,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>BBU design capacity on adapter:{#ADAPTER_ID}</name>
@@ -262,6 +265,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>BBU on adapter {#ADAPTER_ID}:manufacture date</name>
@@ -304,6 +308,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>BBU state of charge on adapter:{#ADAPTER_ID}</name>
@@ -346,6 +351,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>BBU state on adapter:{#ADAPTER_ID}</name>
@@ -390,6 +396,7 @@
                             <valuemap>
                                 <name>LSI RAID BBU &amp; LD Status</name>
                             </valuemap>
+                            <logtimefmt/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -494,6 +501,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>Disk model Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
@@ -536,6 +544,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>Disk predictive errors Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
@@ -578,6 +587,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>Disk size Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
@@ -620,6 +630,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>Disk state Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
@@ -664,6 +675,7 @@
                             <valuemap>
                                 <name>LSI RAID PhysDrv Status</name>
                             </valuemap>
+                            <logtimefmt/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -777,6 +789,7 @@
                                 </application>
                             </applications>
                             <valuemap/>
+                            <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
                             <name>RAID Volume state Adapter:{#ADAPTER_ID},ID:{#VDRIVE_ID}</name>
@@ -821,6 +834,7 @@
                             <valuemap>
                                 <name>LSI RAID BBU &amp; LD Status</name>
                             </valuemap>
+                            <logtimefmt/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
