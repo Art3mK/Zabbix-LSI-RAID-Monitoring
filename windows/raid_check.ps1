@@ -54,7 +54,7 @@ function pdisk_item($item,$adapter,$enclosure_id,$disk_id) {
         if ($output -Match '^(Unconfigured\(good\).*|Online,\sSpun.*|Hotspare,\sSpun.*)$') {
             $output = 0
         }
-        elseif (($output -Match '^Rebuild') {
+        elseif ($output -Match '^Rebuild') {
             $output = 2
         }
         else {
