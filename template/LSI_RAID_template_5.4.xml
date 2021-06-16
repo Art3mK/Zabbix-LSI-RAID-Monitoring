@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.4</version>
+    <date>2021-06-15T10:32:27Z</date>
+    <groups>
+        <group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <uuid>6a5f57eaa3bc4041b7dedd87defbd38e</uuid>
+            <template>Template LSI RAID</template>
+            <name>Template LSI RAID (agent + trapper)</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>1414c486fe36428aae5fa2a50d9a5efd</uuid>
+                    <name>RAID discovery adapters</name>
+                    <type>TRAP</type>
+                    <key>hw.raid.discovery.adapters</key>
+                    <delay>0</delay>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>488ad62ac49d424ead936f5d3266cce8</uuid>
+                            <name>Adapter {#ADAPTER_ID} firmware</name>
+                            <key>hw.raid.adapter[{#ADAPTER_ID},&quot;fw_version&quot;]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID adapter</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>4d23e9edd40d40f7b82264818124109b</uuid>
+                            <name>Adapter {#ADAPTER_ID} model</name>
+                            <key>hw.raid.adapter[{#ADAPTER_ID},&quot;product_name&quot;]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID adapter</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <uuid>eb70286ed6d74df9ba91a98824caad06</uuid>
+                    <name>RAID discovery bbu</name>
+                    <type>TRAP</type>
+                    <key>hw.raid.discovery.bbu</key>
+                    <delay>0</delay>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>ca38da6751854290bc8bdc871a76fae5</uuid>
+                            <name>BBU state on adapter:{#ADAPTER_ID}</name>
+                            <type>TRAP</type>
+                            <key>hw.raid.bbu[{#ADAPTER_ID},&quot;bbu_state&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <valuemap>
+                                <name>LSI RAID BBU &amp; LD Status</name>
+                            </valuemap>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID BBU</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>e1e2bdd4760346b3b5338781f473f6e2</uuid>
+                                    <expression>last(/Template LSI RAID/hw.raid.bbu[{#ADAPTER_ID},&quot;bbu_state&quot;])=1</expression>
+                                    <name>BBU is not in optimal state on adapter:{#ADAPTER_ID}</name>
+                                    <priority>HIGH</priority>
+                                    <description>Backup Battery Unit on RAID adapter is not in operational state. RAID volumes performance can be degraded</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <uuid>696ebe8794e14de7ae8ae69c5ffc6301</uuid>
+                                    <expression>nodata(/Template LSI RAID/hw.raid.bbu[{#ADAPTER_ID},&quot;bbu_state&quot;],720s)=1</expression>
+                                    <name>RAID info is outdated on {HOST.NAME}</name>
+                                    <priority>DISASTER</priority>
+                                    <description>RAID INFO not updated more than 10 minutes. Check task scheduler on host and connectivity</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>e9dbcd4b7f9e4299985488a7b53f0b33</uuid>
+                            <name>BBU on adapter {#ADAPTER_ID}:manufacture date</name>
+                            <key>hw.raid.bbu[{#ADAPTER_ID},&quot;date_manufactured&quot;]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <value_type>CHAR</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID BBU</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>0937b02d389b47dca9a154a36cd93c92</uuid>
+                            <name>BBU design capacity on adapter:{#ADAPTER_ID}</name>
+                            <key>hw.raid.bbu[{#ADAPTER_ID},&quot;design_capacity&quot;]</key>
+                            <delay>86400</delay>
+                            <history>1d</history>
+                            <status>DISABLED</status>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID BBU</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>cf267e7bacbc45b5830e1a0c35eb1c56</uuid>
+                            <name>BBU current capacity on adapter:{#ADAPTER_ID}</name>
+                            <key>hw.raid.bbu[{#ADAPTER_ID},&quot;full_capacity&quot;]</key>
+                            <delay>300</delay>
+                            <history>7d</history>
+                            <status>DISABLED</status>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID BBU</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>a4745a0c94e748e791c6ab316123648f</uuid>
+                            <name>BBU state of charge on adapter:{#ADAPTER_ID}</name>
+                            <type>TRAP</type>
+                            <key>hw.raid.bbu[{#ADAPTER_ID},&quot;state_of_charge&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <units>%</units>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID BBU</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>e638200938f94f4894aed8dea6017e12</uuid>
+                                    <expression>avg(/Template LSI RAID/hw.raid.bbu[{#ADAPTER_ID},&quot;state_of_charge&quot;],#3)&lt;55</expression>
+                                    <name>BBU on adapter:{#ADAPTER_ID} charge capacity degraded</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <uuid>250fbfab47434d2e8dd8cfb5bc9aa294</uuid>
+                    <name>RAID discovery pdisks</name>
+                    <type>TRAP</type>
+                    <key>hw.raid.discovery.pdisks</key>
+                    <delay>0</delay>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>40d9f77361af4de8b31a48e2d9eb18f3</uuid>
+                            <name>Disk state Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                            <type>TRAP</type>
+                            <key>hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;firmware_state&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <valuemap>
+                                <name>LSI RAID PhysDrv Status</name>
+                            </valuemap>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Physical Volume</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>962cc00f8cc54ad393a148410e1d10d7</uuid>
+                                    <expression>last(/Template LSI RAID/hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;firmware_state&quot;])=1</expression>
+                                    <name>Disk state Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID} is not Optimal</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <uuid>c95a06371375473f9191d47da0f5104f</uuid>
+                                    <expression>last(/Template LSI RAID/hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;firmware_state&quot;])=2</expression>
+                                    <name>Disk state Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID} is Rebuild</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>c610d2fcf98443e780296a216578fa35</uuid>
+                            <name>Disk model Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                            <key>hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;inquiry_data&quot;]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Physical Volume</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>65471053ecac455fb1922b010537744e</uuid>
+                            <name>Disk Media errors Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                            <type>TRAP</type>
+                            <key>hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;media_errors&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Physical Volume</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>345df6f34fef4d1b9a327aaaddb26158</uuid>
+                                    <expression>last(/Template LSI RAID/hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;media_errors&quot;])&lt;&gt;0</expression>
+                                    <name>Disk have media errors Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>151adbbb9945419fb746fdb6f25a2090</uuid>
+                            <name>Disk predictive errors Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                            <type>TRAP</type>
+                            <key>hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;predictive_errors&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Physical Volume</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>fcfa8492af8b425bb6f2b25a2f06a6bf</uuid>
+                                    <expression>last(/Template LSI RAID/hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;predictive_errors&quot;])&lt;&gt;0</expression>
+                                    <name>Disk have predictive errors Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>2de9ed0e3048480bacc55e572e9b235e</uuid>
+                            <name>Disk size Adapter:{#ADAPTER_ID},ENC:{#ENCLOSURE_ID},Disk:{#PDRIVE_ID}</name>
+                            <key>hw.raid.physical_disk[{#ADAPTER_ID},{#ENCLOSURE_ID},{#PDRIVE_ID},&quot;raw_size&quot;]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Physical Volume</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <uuid>2aaff77ea3cf4f078a81e2ea8bb85f42</uuid>
+                    <name>RAID discovery vdisks</name>
+                    <type>TRAP</type>
+                    <key>hw.raid.discovery.vdisks</key>
+                    <delay>0</delay>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>4ca547b6f8f74631adada8e4ec160db9</uuid>
+                            <name>RAID Volume size Adapter:{#ADAPTER_ID},ID:{#VDRIVE_ID}</name>
+                            <key>hw.raid.logical_disk[{#ADAPTER_ID},{#VDRIVE_ID},&quot;vd_size&quot;]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Logical Volume</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>c5b1520d494244c1badb3d1928c7c568</uuid>
+                            <name>RAID Volume state Adapter:{#ADAPTER_ID},ID:{#VDRIVE_ID}</name>
+                            <type>TRAP</type>
+                            <key>hw.raid.logical_disk[{#ADAPTER_ID},{#VDRIVE_ID},&quot;vd_state&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <valuemap>
+                                <name>LSI RAID BBU &amp; LD Status</name>
+                            </valuemap>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>LSI RAID Logical Volume</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>6d1c81494297400c8be97dd803b2dcc4</uuid>
+                                    <expression>last(/Template LSI RAID/hw.raid.logical_disk[{#ADAPTER_ID},{#VDRIVE_ID},&quot;vd_state&quot;])=1</expression>
+                                    <name>RAID Volume Adapter:{#ADAPTER_ID},ID:{#VDRIVE_ID} state is not Optimal</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <valuemaps>
+                <valuemap>
+                    <uuid>4e97929c2521452db71e0c7e4d8abfec</uuid>
+                    <name>LSI RAID BBU &amp; LD Status</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Optimal</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Failed</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>ca3f8102b1d84542b17a67c1b6c9fce3</uuid>
+                    <name>LSI RAID PhysDrv Status</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>(Online|Hostpare|Unconfigured good)</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Failed</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Rebuild</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+</zabbix_export>
